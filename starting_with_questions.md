@@ -6,9 +6,42 @@ Answer the following questions and provide the SQL queries used to find the answ
 
 SQL Queries:
 
+```sql
+SELECT 
+	country
+	,SUM(revenue) AS total_revenue
+FROM base_revenue
 
+JOIN base_visitors USING (full_visitor_id)
+
+WHERE country IS NOT NULL
+
+GROUP BY
+	country
+
+ORDER BY total_revenue DESC
+```
+
+```sql
+SELECT 
+	city
+	,SUM(revenue) AS total_revenue
+FROM base_revenue
+
+JOIN base_visitors USING (full_visitor_id)
+
+WHERE city IS NOT NULL
+	AND city != 'n/a'
+
+GROUP BY
+	city
+
+ORDER BY total_revenue DESC
+```
 
 Answer:
+The countries with the most revenue are the United States, Canada and Germany.
+The cities with the most revenue are Mountain View, San Bruno and New York.
 
 
 
