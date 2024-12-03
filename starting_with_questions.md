@@ -51,10 +51,21 @@ The cities with the most revenue are Mountain View, San Bruno and New York.
 
 SQL Queries:
 
+```sql
+SELECT country
+	,AVG(units_sold)::NUMERIC(10,2) AS average_units_sold
+FROM base_revenue
+JOIN base_visitors USING (full_visitor_id)
+WHERE country IS NOT NULL
+
+GROUP BY country
+ORDER BY average_units_sold DESC
+```
+
 
 
 Answer:
-
+The average number of units sold is highest in the United States with 16.8, then Canada with 2.17 and Germany, Japan and Switzerland with 1.
 
 
 
