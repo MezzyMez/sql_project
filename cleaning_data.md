@@ -49,21 +49,23 @@ DROP TABLE IF EXISTS base_products;
 CREATE TABLE base_products AS 
 
 SELECT 
-	sku AS product_sku
-	,name
-	,ordered_quantity::INT
-	,stock_level::INT
-	,restocking_lead_time::INT
-	,sentiment_score::FLOAT
-	,sentiment_magnitude::FLOAT
+	p.sku AS product_sku
+	,COALESCE(s.v2_product_name, p.name) AS product_name
+	,s.v2_product_category AS product_category
+	,p.ordered_quantity::INT
+	,p.stock_level::INT
+	,p.restocking_lead_time::INT
+	,p.sentiment_score::FLOAT
+	,p.sentiment_magnitude::FLOAT
 FROM
-	raw_products
+	raw_products AS p
+
+LEFT JOIN raw_all_sessions AS s 
+	ON p.sku = s.product_sku
+
 WHERE 
 	ordered_quantity::INT > 0
 	AND stock_level::INT > 0;
-
---ALTER TABLE IF EXISTS public.test
---    OWNER to postgres;
 ```
 
 ##Create base_revenue
