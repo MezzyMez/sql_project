@@ -2,8 +2,14 @@ Question 1: What is the average time on site?
 
 SQL Queries:
 
-Answer: 
+```sql
+SELECT 
+	AVG (time_on_site)::NUMERIC(10,2) AS average_time_on_site
+FROM base_visits
+```
 
+Answer: 
+ The average time on site for all sessions was 342 seconds
 
 
 Question 2: What are the top 5 countries with highest average time on site?
@@ -51,18 +57,35 @@ LIMIT 5
 Answer:
 
 | Product SKU | Quantity | Product Name |
+| ----------- | -------- | ------------ |
 | GGOEGOAQ012899 | 456 | Ballpoint LED Light Pen |
 | GGOEGDHC074099 | 334 | Google 17oz Stainless Steel Sport Bottle |
 | GGOEGOCB017499 | 319 | Leatherette Journal |
 | GGOEGOCC077999 | 290 | Google Spiral Journal with Pen |
 | GGOEGFYQ016599 | 253 | Koozie Can Kooler |
 
-Question 4: 
+
+Question 4: What are the 3 categories with the top sentiment scores?
 
 SQL Queries:
 
+```sql
+SELECT 
+	product_category
+	,(SUM(sentiment_score*ordered_quantity)/SUM(ordered_quantity))::NUMERIC(10,2) AS average_sentiment_score
+FROM base_products
+GROUP BY product_category
+ORDER BY average_sentiment_score DESC
+LIMIT 3
+```
+
 Answer:
 
+| Product Category | Sentiment Score |
+| ---------------- | --------------- |
+| Drinkware | 0.90 |
+| Lifestyle | 0.73 |
+| Home/Limited Supply |	0.72 |
 
 
 Question 5: 
