@@ -74,10 +74,22 @@ The average number of units sold is highest in the United States with 16.8, then
 
 
 SQL Queries:
-
+```sql
+SELECT 
+	country
+	,city
+	,product_category
+	,COUNT(*) AS count
+FROM base_transactions
+JOIN base_visitors USING (full_visitor_id)
+WHERE country IS NOT NULL
+GROUP BY country, city, product_category
+ORDER BY count DESC
+```
 
 
 Answer:
+In general, there are not enough confirmed sales to derive accurate answers. Products in the home category make the vast bulk of sales, with NEST products containing the most common sales.
 
 
 
@@ -88,11 +100,25 @@ Answer:
 
 SQL Queries:
 
-
+```sql
+SELECT 
+	country
+	,product_name
+	,COUNT(product_name)
+	,RANK() OVER (PARTITION BY country ORDER BY COUNT(product_name) DESC)
+FROM base_transactions
+JOIN base_visitors AS visitors USING (full_visitor_id)
+GROUP BY country, product_name
+ORDER BY country
+```
 
 Answer:
 
-
+"Australia"	"Nest® Cam Indoor Security Camera - USA"	1	1
+"Canada"	"Google Men's 3/4 Sleeve Raglan Henley Grey"	1	1
+"Israel"	"Nest® Protect Smoke + CO Black Wired Alarm-USA"	1	1
+"Switzerland"	"YouTube Men's 3/4 Sleeve Henley"	1	1
+"United States"	"Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel"	7	1
 
 
 
