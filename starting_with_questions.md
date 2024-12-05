@@ -65,7 +65,7 @@ ORDER BY average_units_sold DESC
 
 
 Answer:
-The average number of units sold is highest in the United States with 16.8, then Canada with 2.17 and Germany, Japan and Switzerland with 1.
+The average number of confirmed units sold is highest in the United States with 16.8, then Canada with 2.17 and Germany, Japan and Switzerland with 1.
 
 
 
@@ -104,8 +104,8 @@ SQL Queries:
 SELECT 
 	country
 	,product_name
-	,COUNT(product_name)
-	,RANK() OVER (PARTITION BY country ORDER BY COUNT(product_name) DESC)
+	,COUNT(product_name) AS product_count
+	,RANK() OVER (PARTITION BY country ORDER BY COUNT(product_name) DESC) AS rank
 FROM base_transactions
 JOIN base_visitors AS visitors USING (full_visitor_id)
 GROUP BY country, product_name
@@ -114,11 +114,13 @@ ORDER BY country
 
 Answer:
 
-"Australia"	"Nest® Cam Indoor Security Camera - USA"	1	1
-"Canada"	"Google Men's 3/4 Sleeve Raglan Henley Grey"	1	1
-"Israel"	"Nest® Protect Smoke + CO Black Wired Alarm-USA"	1	1
-"Switzerland"	"YouTube Men's 3/4 Sleeve Henley"	1	1
-"United States"	"Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel"	7	1
+| Country | Product | Product Count | Rank |
+| ------- | ------- | ------------- | ---- |
+|Australia | Nest® Cam Indoor Security Camera - USA | 1 | 1 |
+| Canada | Google Men's 3/4 Sleeve Raglan Henley Grey |	1 | 1 |
+| Israel |	Nest® Protect Smoke + CO Black Wired Alarm-USA | 1 | 1 |
+| Switzerland |	 YouTube Men's 3/4 Sleeve Henley | 1 | 1 |
+| United States | Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel |	7 |	1 |
 
 
 
@@ -126,11 +128,29 @@ Answer:
 
 SQL Queries:
 
-
+```sql
+SELECT 	
+	country
+	,SUM(revenue) AS total_revenue
+	,RANK() OVER (ORDER BY SUM(revenue) DESC)
+FROM base_revenue
+JOIN base_visitors AS visitors USING (full_visitor_id)
+WHERE country IS NOT NULL
+GROUP BY country
+ORDER BY total_revenue DESC
+```
 
 Answer:
 
+The vast amount of confirmed revenue come from the United States. Other countries have negligible impact with the possible exception of Canada;
 
+| Country | Total_revenue | Rank |
+| ------- | ------------- | ---- |
+| United States | 56688 | 5 |
+| Canada | 445 | 4 |
+| Germany |	69 | 3 |
+| Japan | 29 |	2 |
+| Switzerland |	16	| 1 |
 
 
 
