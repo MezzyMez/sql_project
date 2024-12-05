@@ -65,7 +65,7 @@ Answer:
 | GGOEGFYQ016599 | 253 | Koozie Can Kooler |
 
 
-Question 4: What are the 3 categories with the top sentiment scores?
+Question 4: What are the 3 categories with the top sentiment scores weighted by quantity ordered?
 
 SQL Queries:
 
@@ -88,8 +88,27 @@ Answer:
 | Home/Limited Supply |	0.72 |
 
 
-Question 5: 
+Question 5: What countries have the highest visits (ignoring the United States)?
 
 SQL Queries:
 
+```sql
+SELECT 
+	country
+	,COUNT(country) AS user_count
+FROM base_visitors
+WHERE 1=1
+	AND country IS NOT NULL
+	AND country != 'United States'
+GROUP BY country
+ORDER BY user_count DESC
+LIMIT 3
+```
+
 Answer:
+
+| Country | Visits |
+| ------- | ------ |
+| India | 694 |
+| United Kingdom | 641 |
+| Canada | 609 |
