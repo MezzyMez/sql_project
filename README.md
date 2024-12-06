@@ -28,4 +28,4 @@ This dataset was fairly large, but very unorganized. Much of it was confusing, r
 Sales data was difficult to attain from this data set. Individual product information could not be attributed to transactions nor could unit price be reconciled to products. 
 
 ## Future Goals
-With more time, and more guidance on what the information meant, the accuracy of the sales data could be far greater. Given enough time, reconciling traffic data with sales_by_sku could be done to confirm revenue data.
+With more time, and more guidance on what the information meant, the accuracy of the sales data could be far greater. Given enough time, reconciling traffic data with sales_by_sku could be done to confirm revenue data. Also, duplicates were of serious concern in this data. With more time, more data cleaning could occur. 
