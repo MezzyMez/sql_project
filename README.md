@@ -1,7 +1,19 @@
 # Final-Project-Transforming-and-Analyzing-Data-with-SQL
 
+
+#### -- Project Status: [Completed]
+
 ## Project/Goals
 The goal of this project was to use raw data from provided CSV files and turn this into a functional database to answer analytical questions.
+
+### Partner
+* Lighthouse Labs
+* [lighthouselabs.ca](https://www.lighthouselabs.ca/)
+
+### Technologies
+* SQL (Postgres)
+* Git
+* Visual Studio Code
 
 ## Process
 ### Process CSVs
@@ -16,4 +28,4 @@ This dataset was fairly large, but very unorganized. Much of it was confusing, r
 Sales data was difficult to attain from this data set. Individual product information could not be attributed to transactions nor could unit price be reconciled to products. 
 
 ## Future Goals
-With more time, and perhaps more guidance on what the information meant, the accuracy of the sales data could be far greater. Given enough time, reconciling traffic data with sales_by_sku could be done to confirm revenue data.
+With more time, and more guidance on what the information meant, the accuracy of the sales data could be far greater. Given enough time, reconciling traffic data with sales_by_sku could be done to confirm revenue data.
