@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS base_products;
 
 CREATE TABLE base_products AS 
 
-SELECT 
+SELECT DISTINCT
 	p.sku AS product_sku
 	,COALESCE(s.v2_product_name, p.name) AS product_name
 	,s.v2_product_category AS product_category
